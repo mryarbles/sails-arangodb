@@ -5,7 +5,8 @@
   "main": "./lib/adapter.js",
   "scripts": {
     "test": "gulp waterline; gulp test",
-    "lint": "jshint lib/*.js"
+    "lint": "jshint lib/*.js",
+    "build": "./node_modules/.bin/babel ./src -d ./lib"
   },
   "repository": {
     "type": "git",
@@ -26,11 +27,14 @@
     "aqb": ">=1.8.3",
     "arangojs": "5.x.x",
     "async": "^0.9.0",
+    "babel": "6.23.0",
+    "babel-preset-env": "1.7.0",
     "debug": "^2.3.3",
     "lodash": ">=3.10.1",
     "q": "^1.0.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "captains-log": "~0.11.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",

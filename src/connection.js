@@ -1,15 +1,9 @@
-'use strict';
-
-var _DBHelper = require('./DBHelper');
-
-var _DBHelper2 = _interopRequireDefault(_DBHelper);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+import DBHelper from './DBHelper';
 
 var Arango = require('arangojs'),
-    Q = require('q'),
-    _ = require('lodash'),
-    debug = require('debug')('sails-arangodb:connection');
+  Q = require('q'),
+  _ = require('lodash'),
+  debug = require('debug')('sails-arangodb:connection');
 
 debug.log = console.log.bind(console);
 
@@ -18,7 +12,7 @@ debug.log = console.log.bind(console);
  * @module
  * @name connection
  */
-module.exports = function () {
+module.exports = (function () {
 
   var serverUrl = '';
 
@@ -33,7 +27,7 @@ module.exports = function () {
   /**
    * Connect to ArangoDB and use the requested database or '_system'
    */
-  var getDb = function getDb(connection) {
+  var getDb = function (connection) {
     debug('getDB() connection:', connection);
     var userpassword = '';
     if (connection.user && connection.password) {
@@ -44,22 +38,22 @@ module.exports = function () {
     if (!server) {
       server = new Arango({
         url: serverUrl,
-        databaseName: connection.database || '_system'
+        databaseName: connection.database ||  '_system'
       });
     }
     return server;
   };
 
-  var getGraph = function getGraph(db, connection) {
+  var getGraph = function (db, connection) {
     debug('getGraph() connection.graph:', connection.graph);
     return db.graph(connection.graph);
   };
 
-  var getCollection = function getCollection(db, connection) {
+  var getCollection = function (db, connection) {
     return db.collection(connection.collection);
   };
 
-  var connect = function connect(connection, collections) {
+  var connect = function (connection, collections) {
     // if an active connection exists, use
     // it instead of tearing the previous
     // one down
@@ -70,9 +64,10 @@ module.exports = function () {
       var graph = getGraph(db, connection);
       var helper = new DbHelper(db, graph, collections, connection);
 
-      helper.registerCollections().then(function (classes, err) {
+      helper.registerCollections().then((classes, err) => {
         d.resolve(helper);
       });
+      
     } catch (err) {
       console.error('An error has occured when trying to connect to ArangoDB:', err);
       d.reject(err);
@@ -82,8 +77,8 @@ module.exports = function () {
   };
 
   return {
-    create: function create(connection, collections) {
+    create: function (connection, collections) {
       return connect(connection, collections);
     }
   };
-}();
+})();
