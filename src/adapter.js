@@ -57,6 +57,11 @@ class Adapter {
   
 
   constructor() {
+
+    console.log('=======================');
+    console.log('sails-arangodb adapter constructor');
+    console.log('=======================');
+
     this.syncable = false;
     
     // Primary key format is string (_key|_id)
