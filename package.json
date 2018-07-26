@@ -2,7 +2,7 @@
   "name": "sails-arangodb",
   "version": "0.3.1",
   "description": "Arangodb adapter for Sails / Waterline",
-  "main": "./lib/adapter.js",
+  "main": "./src/adapter.js",
   "scripts": {
     "test": "gulp waterline; gulp test",
     "lint": "jshint lib/*.js",
