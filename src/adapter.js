@@ -544,6 +544,8 @@ RETURN n
 
 }
 
+const adapter = new Adapter();
+
 
 /**
  * sails-arangodb
@@ -562,9 +564,4 @@ RETURN n
  * @module
  * @name adapter
  */
-export default function() {
-  
-  // Expose adapter definition
-  return new Adapter();
-
-};
+export default adapter;
